@@ -1,0 +1,80 @@
+
+Subneting con VLSM paso a paso
+
+Esta no es una entrada de lo más normal debido a que no es por donde se comenzaría a aprender subneteo y redes. Habría que saber varias cositas mas antes de arrojarse al vlsm, pero un compañero necesita una mano en la materia de REDES de la #uncoma asi que siempre para ayudar y seguir aprediendo le dedico esta entrada denominada Subneting con VLSM paso a paso
+
+VLSM son siglas en ingles que vienen de Variable Lenght Subnet Mask o en cagastellano Mascara de Logintud Variable. Esta estrategia se creo para optimizar el recurso de las direcciones ip cuando tenemos que crear redes a partir de una ip dada y tratar de "no desperdiciar" ip de gusto o hacerlo lo menos posible.
+
+Cuando te piden hacer un ejercicio de subneteo y te indican que no hay que desperdiciar ya sabes que es igual a VLSM
+
+Primera formula que debo saber:
+
+Fórmula: 2n-2   donde  n=son bits prestados   -2= son los bits que se pierden dos direcciones, una de red y una de broadcast.
+El ejemplo con el que vamos a jugar es el siguiente (Yo lo tengo sobre gns3):
+
+Lo que tengo que hacer es ordenarme en una hoja de calculos es el orden con el que se trabaja, siendo siempre de mayor cantidad de host a menor.
+
+RED B: 100 host
+RED A: 50 host
+RED C: 2 host
+RED D: 2 host
+RED E: 2 host
+Ahora generalmente para esta practica nos indican "dada tal dirección ip" haga el trabajo. Para este ejemplo vamos a usar la 172.16.0.0/24
+Para este entonces también deberías saber pasar a bits las ips, yo creo que en futuras entradas voy a ir poniendo algo como redes desde cero, pero por ahora les voy a facilitar las cuentas.
+
+Subred	Nº de Hosts	IP de red	Máscara	Primer Host	Último Host	Broadcast
+B	126	172.16.0.0	255.255.255.128	172.16.0.1	172.16.0.126	172.16.0.127
+A	62	172.16.0.128	255.255.255.192	172.16.0.129	172.16.0.190	172.16.0.191
+C	2	172.16.0.192	255.255.255.252	172.16.0.193	172.16.0.194	172.16.0.195
+D	2	172.16.0.196 	255.255.255.252	172.16.0.197	172.16.0.198	172.16.0.199
+E	2	172.16.0.200 	255.255.255.252	172.16.0.201	172.16.0.202	172.16.0.203
+
+
+Ahora necesitamos determinar el número de bits de la parte de host usando la formula:
+
+2n−2≥H
+En la formula vemos a n que es el número de bits y H que es el número de host de la subred:
+
+27−2=126 ≥ 100 ⟹n=7
+Que son todos esos numeros??? no te asustes compañero. Jugando sin saber mucho más vas haciendo la cuenta de 2 elevado a la 7, luego de 2 elevado a la 8. La idea siempre es que el resultado te quede mayor (pero no tanto) o igual que el numero que necesitas en tu red. Recordamos que la primer red necesitaba 100 host.
+
+Esto quiere decir que para la red de 100 hosts necesitamos al menos 7 bits y que habrá en total 126 hosts disponibles (vamos a desperdiciar pero lo menos posible).
+
+Ahora vamos con la formula:
+
+R=(32−p)−n
+La idea de esta formula es que nos permite calcular el número de bits de la subred
+
+32 son la cantidad de bits que tiene una ip binaria. La letra p la vamos a usar para poner el "prefijo" de la red otorgada, en nuestro caso era un /24 y por ultimo la n que la calculamos en el paso anterior. Nos quedaría:
+
+R=(32−24)−7=1
+Esto nos da como resultado que para obtener una subred de 126 hosts necesitamos tomar prestados 1 bit. Ahora debemos sumar este bit al prefijo que nos habian otorgado para obtener el nuevo prefijo:
+
+p=24+1=25
+11111111.11111111.11111111.10000000
+
+Estos bits puestos de esta manera son iguales a una mascara: 
+
+255.255.255.128
+Ya tenemos nuestra primer red y para obtener nuestra nueva red o nuestro SALTO DE RED vamos a realizar el siguiente calculo:
+
+SALTO DE RED: Diferencia entre dos direcciones de red consecutivas y se calcula como la diferencia de 256 y el último octeto no nulo de la máscara, en este caso tenemos que:
+
+S=256−128=128
+Y ahora?
+
+Bueno ahora vamos a acomodar un poco las cosas.....
+
+La primer dirección de red siempre es la que nos dan, o sea: 172.16.0.0 y si sumamos 1 tenemos que el primer host es 172.16.0.1 y ahora necesitamos saber cual es el ultimo host por lo cual hacemos:
+
+Suma a la dirección de red el número de host de la subred
+ 0 + 126 
+
+Nuestro ultimo host entonces es 172.16.0.126 y para concluir tenemos que sumarle uno para saber cual es el broadcast, que es 172.16.0.127.
+
+Claramente la dirección de red de la siguiente subred es 172.16.0.128
+Queda ahora volver a empezar hasta concluir con la cantidad de redes solicitadas. 
+
+Como les indicaba al principio, antes de llegar a Subneting con VLSM paso a paso es prioritario saber que es una ip, que son las clases, que es una mascara, un gateway, bit......en fin. Es importante aprender el origen teorico de las cosas!!
+
+Trate de ser sencillo en este tutorial, creo que de esta manera se puede realizar sin demasiados conocimientos un calculo de vlsm y aplicarlo tranquilamente. Saludos cordiales y cualquier duda por acá estamos!!
