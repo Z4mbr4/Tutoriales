@@ -192,7 +192,7 @@ Ejemplo de cómo subir una imagen al servidor.
 
 **Así se ve el enlace de la imagen inline:**
 
-<img src="C:\Users\luiz\Documents\MEGA\Tutoriales\Tutoriales\culturalibre.png" alt="CulturaLibre" style="zoom:25%;" />
+<img src="https://github.com/Z4mbr4/Tutoriales/blob/main/culturalibre.png" alt="CulturaLibre" style="zoom:25%;" />
 
 
 
