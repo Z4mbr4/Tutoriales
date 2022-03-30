@@ -5,7 +5,7 @@ Todos se encontrarán escritos en Markdown y en cagastellano para todes!
 
 ## **Redes**
 
-- [Subneteo de Redes con VLS](https://github.com/Z4mbr4/Tutoriales/blob/main/Subneting%20con%20VLSM)
+- [Subneteo de Redes con VLSM](https://github.com/Z4mbr4/Tutoriales/blob/main/Subneting%20con%20VLSM)
 
 ## **Docker**
 
