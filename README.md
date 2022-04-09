@@ -3,6 +3,8 @@ En este repositorio encontrarán tutoriales que fui escribiendo para el blog #Cu
 
 Todos se encontrarán escritos en Markdown y en cagastellano para todes!
 
+Te dejo un código de promocion para #DigitalOcean https://m.do.co/c/2976779cc979 al usarlo te da 100 dolares para que pruebes gratis sus servicios y al igual que las plataforma netflix etc te solicita datos de la tarjeta de credito. Sino lo usas mas le das de baja y fue!
+
 ## **Redes**
 
 - [Subneteo de Redes con VLSM](https://github.com/Z4mbr4/Tutoriales/blob/main/Subneting%20con%20VLSM)
