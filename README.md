@@ -10,7 +10,8 @@ Todos se encontrarán escritos en Markdown y en cagastellano para todes!
 ## **Docker**
 
 - [Instalación de docker sobre ubuntu - windows y raspberry pi](https://github.com/Z4mbr4/Tutoriales/blob/main/Instalaci%C3%B3n%20de%20Docker%20sobre%20Ubuntu%2020.04.md)
-- [Wordpress con SSL sobre raspberry pi](https://github.com/Z4mbr4/Tutoriales/blob/main/Wordpress%20con%20SSL%20para%20Raspberry.md)
+- [Wordpress con SSL sobre RaspberryPi](https://github.com/Z4mbr4/Tutoriales/blob/main/Wordpress%20con%20SSL%20para%20Raspberry.md)
+- [Pi-Hole sobre Docker en RaspberryPi](https://github.com/Z4mbr4/Tutoriales/blob/main/Pihole%20sobre%20docker%20en%20Raspberry.md)
 
 ## **Varios**
 
