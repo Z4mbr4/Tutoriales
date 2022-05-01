@@ -22,4 +22,5 @@ Te dejo un código de promocion para #DigitalOcean https://m.do.co/c/2976779cc97
 
 - [Escribir en Markdown](https://github.com/Z4mbr4/Tutoriales/blob/main/Escribir%20en%20Markdown.md)
 - [Arrancar raspberry pi desde USB](https://github.com/Z4mbr4/Tutoriales/blob/main/Inciar%20RaspberryPi3%20desde%20USB.md)
+- [Seguridad minima para nuestro servidor](https://github.com/Z4mbr4/Tutoriales/blob/main/Seguridad%20minima%20para%20nuestro%20Servidor.md)
 
