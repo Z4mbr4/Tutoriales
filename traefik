@@ -1,0 +1,79 @@
+1 - Creamos carpeta traefik
+2 - dentro creamps docker-compose.yml con el siguiente contenido:
+
+version: '3'
+
+services:
+  traefik:
+    restart: always
+    image: traefik:v2.2
+    command:
+      --api
+      --global.sendAnonymousUsage=false
+      --entryPoints.http.address=:80
+      --entryPoints.https.address=:443
+      --certificatesresolvers.tls.acme.tlschallenge=true
+      --certificatesResolvers.tls.acme.storage=acme.json
+      --certificatesresolvers.tls.acme.httpchallenge=true
+      --certificatesResolvers.tls.acme.httpChallenge.entryPoint=http
+      --providers.docker=true
+      --providers.docker.exposedbydefault=false
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - data:/etc/traefik
+    networks:
+      - web
+    ports:
+      - "80:80"
+      - "443:443"
+    labels:
+      # middleware redirect-to-https
+      - "traefik.enable=true"
+      - "traefik.http.routers.http-catchall.rule=hostregexp(`{host:[a-z-.]+}`)"
+      - "traefik.http.routers.http-catchall.entrypoints=http"
+      - "traefik.http.routers.http-catchall.middlewares=redirect-to-https"
+      - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
+networks:
+  web:
+    external: true
+volumes:
+  data:
+
+3 - creamos archivo acme.json y le damos permisos chmod 600 acme.json
+4 - la red publica de este traefik es web, hay que crearla: docker network create web
+5 - se necesita generar una contraseña fuerte y encriptada para el archivo traefik.toml para eso htpasswd -nb admin secure_password
+6 - creamos el archivo traefik.toml y en su interior:
+
+defaultEntryPoints = ["http", "https"]
+
+[entryPoints]
+  [entryPoints.dashboard]
+    address = ":8080"
+    [entryPoints.dashboard.auth]
+      [entryPoints.dashboard.auth.basic]
+        users = ["admin:$apr1$ky8sogRn$o8GY9jgjVndt49n9avQ/4/"]
+  [entryPoints.http]
+    address = ":80"
+      [entryPoints.http.redirect]
+        entryPoint = "https"
+  [entryPoints.https]
+    address = ":443"
+      [entryPoints.https.tls]
+
+[api]
+entrypoint="dashboard"
+
+[acme]
+email = "MAILREGISTRODNS"
+storage = "acme.json"
+entryPoint = "https"
+onHostRule = true
+  [acme.httpChallenge]
+  entryPoint = "http"
+
+[docker]
+domain = "ACAPONELAURL"
+watch = true
+network = "web"
+
+7 - docker-compose up -d
